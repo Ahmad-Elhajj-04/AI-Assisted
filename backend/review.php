@@ -6,7 +6,7 @@ $api_key = "sk-proj-Ph-LNTncMkq6zIz7suUzZDfHxMi_-EzbYXlj2ghT3sBacccFgae5APiixeSr
 $url = 'https://api.openai.com/v1/chat/completions';
 
 
-$user_prompt = "I need you to check this code for me for any possible mistakes, give me the response in JSON format according to the following instructions. 1. Severity : high,medium,or low. 2. The file name (or nothing if its not a file). 3. A short identifier of the issue. 4. A suggestion to fix the code .The reply should only contain the JSON code and no other data inside it.The code is : def greet_and_age(name, age)   print('Hello, ' + name) next_age = age + 1s print('Next year you will be: ' + next_age) greet_and_age('Jesse', '29') ";
+$user_prompt = "I need you to check this code for me for any possible mistakes, give me the response in JSON format according to the following instructions. 1. Severity : high,medium,or low. 2. The file name (or nothing if its not a file). 3. A short identifier of the issue. 4. A suggestion to fix the code .The result must be inside an object called 'reviews'.The code is : def greet_and_age(name, age)   print('Hello, ' + name) next_age = age + 1s print('Next year you will be: ' + next_age) greet_and_age('Jesse', '29') ";
 
 $data = [
         'model'    => 'gpt-4o',
