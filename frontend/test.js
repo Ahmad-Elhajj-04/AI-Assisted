@@ -13,7 +13,7 @@ const schema = JSON.parse(fs.readFileSync("./schema.json", "utf-8"));
 const ajv = new Ajv({ allErrors: true });
 const validate = ajv.compile(schema);
 
-// API endpoint (Person A’s PHP file)
+// API endpoint (Person A's PHP file)
 const API_URL = "http://localhost/AI-Assisted/backend/review.php";
 
 // Test input (Python code with missing validation)
