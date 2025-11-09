@@ -22,6 +22,7 @@ if(isset($input["code"]) && $input["code"] != ""){
 }
 
 $version =$input["version"];
+$file =$input["filename"];
 
 
 $category_rules = [
@@ -36,24 +37,39 @@ $category_rules = json_encode($category_rules);
 
 if($version){
 $user_prompt = <<<PROMPT
-I need you to check this code for me for any possible mistakes, give me the response in JSON format according to the following instructions.
+I need you to check this code for me for any possible mistakes,find the programming language and give me the response in JSON format according to the following instructions.
+
+"reviews" that includes:
+
 1. Severity : high,medium,or low. 
-2. The file name (or nothing if its not a file). 
+2. The file name: $file (or nothing if its not a file). 
 3. A short identifier of the issue with the category and rule-id according to this array : $category_rules. 
-4. A suggestion to fix the code .
+4. Which line the error is in. 
+5. A suggestion to fix the code .
 
-Which means there should be six columns : Severity, File Name, Identifier,Category, Rule-ID, and Suggestion. 
+Which means there should be seven columns : Severity, File Name, Identifier,Category, Rule-ID,Line and Suggestion. 
 
-Security problems are high severity, bug risk problems are medium severity, and the rest are low severity, The result must be inside an object called 'reviews',no other data should be included in the answer.
-If there are any errors that are not included in the rules, include it in generic and give it a severity of your own jurisdiction (high,medium,low).If there are no errors in the code, submit a json object with "Status" : Success", "Issue" : "No errors detected.".The code is : $code
+Security problems are high severity, bug risk problems are medium severity, and the rest are low severity, The result must be inside an object called 'reviews'.
+
+And another "Language": with the programming language inside this code, if there is no programming language it is set to none.
+
+If there are no errors in the code you should return a JSON object with "Status" : "Success","Reason" : "No errors detected in this code." .
+
+If there are any errors that are not included in the rules, include it in generic and give it a severity of your own jurisdiction (high,medium,low).
+
+If there is no readable or understandable code you should return a JSON object with "Status" : "Failure","Reason" : "No code detected.".
+The code is : $code
 PROMPT; 
       
 } else{
 $user_prompt = <<<PROMPT
 
-I need you to check this code for me for any possible mistakes, give me the response in JSON format according to the following instructions. 
+I need you to check this code for me for any possible mistakes,find the programming language and give me the response in JSON format according to the following instructions:
+
+"reviews": that includes:
+
 1. Severity : high,medium,or low. 
-2. The file name (or nothing if its not a file). 
+2. The file name only from $file (or nothing if its not a file). 
 3. A short identifier of the issue. 
 4. A suggestion to fix the code.
 
@@ -61,7 +77,13 @@ Which means there should be four columns : Severity, File Name, Issue, and Sugge
 
 Security problems are high severity, bug risk problems are medium severity, and the rest are low severity, The result must be inside an object called 'reviews',no other data should be included in the answer.
 
-If there are no errors in the code you should return a JSON object with "Status" : "Success","Reason" : "No errors detected in this code." only without anything else.
+And another "Language": with the programming language inside this code,if there is no programming language it is set to none.
+
+If there are no errors in the code you should return a JSON object with "Status" : "Success","Reason" : "No errors detected in this code."
+
+If there are any errors that are not included in the rules, include it in generic and give it a severity of your own jurisdiction (high,medium,low).
+
+If there is no readable or understandable code you should return a JSON object with "Status" : "Failure","Reason" : "No code detected." and language.
 The code is : $code
 PROMPT;     
 }
