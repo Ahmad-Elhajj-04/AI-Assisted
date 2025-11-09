@@ -1,20 +1,32 @@
-document.getElementById('sender').onclick =  async function sendData() {
+document.getElementById("sender").onclick = async function sendData() {
+  const checkBox = document.getElementById("myCheck");
+  const response = await axios.post(
+    "http://localhost/AI-Assisted/backend/review.php",
+    {
+      code: document.getElementById("code").value,
+      filename: "app.py",
+      version: checkBox.checked,
+    }
+  );
+  const data = response.data;
+  console.log(data);
+  if (data.Status == "Success") {
+    let res = "";
+    for (const [key, value] of Object.entries(data)) {
+      res += `<strong>${key}:</strong> ${value}<br>`;
+    }
 
-    const response = await axios.post('http://localhost/AI-Assisted/backend/review.php', {
-        code: document.getElementById("code").value,
-        filename: "app.py"
-    })
-   const data = response.data;
-   console.log(data.reviews);
-}
-function myFunction() {
-const checkBox = document.getElementById("myCheck");
-const text = document.getElementById("text");
-if (checkBox.checked == true) {
-    text.style.display = "block";
-}
-else {
-    text.style.display = "none";
+    document.getElementById("result").innerHTML = res;
+  } else {
+    let reviews = data.reviews;
+    let res = "";
+    reviews.forEach((review) => {
+      for (const [key, value] of Object.entries(review)) {
+        res += `<strong>${key}:</strong> ${value}<br>`;
+      }
+      res += "<hr>";
+    });
+
+    document.getElementById("result").innerHTML = res;
   }
-}
-
+};
