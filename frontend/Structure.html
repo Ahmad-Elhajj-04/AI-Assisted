@@ -9,18 +9,26 @@
 
 <div id="input">
       <p>Enter your code</p>
-      <input type="text" id="code" placeholder="Write your code here" />
-      <input type="file" id="file_name" placeholder="Upload your file" />
+     <div class = "input-container">
+      <textarea id="code" placeholder="Write your code here"></textarea>
+      <input type="file" id="file" placeholder="Upload your file" />
+     </div>
+      
       <br /><br />
       
       <button id="sender">Send</button>
-      <input type="checkbox" id="myCheck"> 
+      <input type="checkbox" id="version-check"> 
       <label for="myCheck">Extended Version</label>
+      <input type="checkbox" id="file-check"> 
+      <label for="myCheck">File Mode</label>
       
       
 </div>
 
-
+<div id="output">
+  <h2>Your Input :</h2>
+  <p id ="input-result"></p>
+</div>
 
 <div id="output">
   <h2>Response</h2>

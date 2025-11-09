@@ -2,12 +2,12 @@
 
 header("Content-Type: application/json");
 
-//$api_key = "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 ";
+$api_key = "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 ";
 
-$api_key = "kPEJEyDz6qfdMYXLhON0O1yQXToMSvAeJBYJVTYo";
+//$api_key = "kPEJEyDz6qfdMYXLhON0O1yQXToMSvAeJBYJVTYo";
 
-//$url = 'https://api.openai.com/v1/chat/completions';
-$url = 'https://api.cohere.ai/compatibility/v1/chat/completions';
+$url = 'https://api.openai.com/v1/chat/completions';
+//$url = 'https://api.cohere.ai/compatibility/v1/chat/completions';
 
 $input = json_decode(file_get_contents("php://input"), true);
 
@@ -68,7 +68,7 @@ PROMPT;
 
 
 $data = [
-        'model'    => 'command-a-03-2025', //'command-a-03-2025'
+        'model'    => 'gpt-4o', //'command-a-03-2025'
         'messages' => [
                 ['role' => 'user', 'content' => $user_prompt],
         ],
