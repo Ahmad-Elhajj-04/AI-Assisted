@@ -45,12 +45,6 @@ if(isset($_POST["suggestion"]) && $_POST["suggestion"] != ""){
     return;
 }
 
-
-
-$query = $mysql->prepare("INSERT INTO codes(severity,file,issue,suggestion) VALUES (?,?,?,?)");
-$query->bind_param("ssss",$severity,$file,$issue,$suggestion);
-$query->execute();
-
 $response = [];
 $response["success"] = true;
 echo json_encode($response);
