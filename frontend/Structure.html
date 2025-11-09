@@ -2,20 +2,25 @@
 <html>
   <head>
     <title>AI Code Review</title>
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
-  <link rel="stylesheet" href="styles/style.css" />
   <body>
     <h1>AI-Assisted Code Review</h1>
-    <div id="input">
+
+<div id="input">
       <p>Enter your code</p>
       <input type="text" id="code" placeholder="Write your code here" />
+      <input type="file" id="file_name" placeholder="Upload your file" />
       <br /><br />
       <button id="sender">Send</button>
-    </div>
-    <div id="output">
-      <h2>Response</h2>
-    </div>
-    <script defer src="scripts/axios.min.js"></script>
-    <script defer src="scripts/script.js"></script>
+</div>
+<label for="myCheck">Checkbox:</label> 
+<input type="checkbox" id="myCheck" onclick="myFunction()">
+<p id="text">Submit</p>
+<div id="output">
+  <h2>Response</h2>
+</div>
+<script defer src="scripts/axios.min.js"></script>
+<script defer src="scripts/script.js"></script>
   </body>
 </html>
