@@ -1,21 +1,21 @@
-var myObject = { severity: 'high', file: 'app.py' };
-var str_json = JSON.stringify(myObject); 
+var data = { severity: 'high', file: 'app.py' };
+var takes_object = JSON.stringify(data); 
 fetch("JSON_Handler.php", {
     method: "POST",
     headers: {
-        "Content-type": "application/json" 
+        "Content-type": "../frontend/sample.json" 
     },
-    body: str_json 
+    body: takes_object 
 })
 .then(response => {
     if (!response.ok) {
-        throw new Error(`HTTP Error! Status: ${response.status}`);
+        throw new Error(`HTTP error Status: ${response.status}`);
     }
     return response.json(); 
 })
 .then(data => {
-    console.log("Success! Data:", data);
+    console.log("success Data:", data);
 })
 .catch(error => {
-    console.error("Fetch failed:", error);
+    console.error("fetch failed:", error);
 });
