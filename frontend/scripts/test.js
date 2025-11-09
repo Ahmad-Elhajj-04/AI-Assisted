@@ -1,33 +1,12 @@
-let text = "";
+let text = `
+age_input = input("What is your age? ")
 
-const input = document.getElementById("file");
-input.addEventListener("change", saveFile);
+age = int(age_input) 
 
-function saveFile(event) {
-  const file = event.target.files[0];
+current_year = 2024
+birth_year = current_year - age
 
-  if (!file) {
-    console.log("No file selected.");
-    return;
-  }
-  if (!file.type.startsWith("text")) {
-    console.log("Unsupported file type.");
-    return;
-  }
-
-  const reader = new FileReader();
-
-  reader.onload = () => {
-    text = reader.result;
-    console.log(text);
-  };
-
-  reader.onerror = () => {
-    console.log("Error reading the file.");
-  };
-
-  reader.readAsText(file);
-}
+print(f"You were born in {birth_year}.")`;
 
 document.getElementById("sender").onclick = async function sendData() {
   const checkBox = document.getElementById("version-check").checked;
@@ -47,7 +26,7 @@ document.getElementById("sender").onclick = async function sendData() {
     "http://localhost/AI-Assisted/backend/review.php",
     {
       code: text,
-      filename: document.getElementById('file').value,
+      filename: document.getElementById("file").value,
       version: checkBox,
     }
   );
@@ -58,7 +37,6 @@ document.getElementById("sender").onclick = async function sendData() {
   document.getElementById("input-result").innerHTML = res;
   res = data.Language;
   document.getElementById("language").innerHTML = res;
-  
 
   console.log(data);
   if (data.Status == "Success" || data.Status == "Failure") {
@@ -74,6 +52,20 @@ document.getElementById("sender").onclick = async function sendData() {
     document.getElementById("result").innerHTML = res;
   } else {
     let reviews = data.reviews;
+    /* result :
+     { => It has valid JSON format.
+    "reviews": [ => it is an array
+        {
+            "Severity": "high",
+            "File Name": "",
+            "Issue": "Potential ValueError",
+            "Suggestion": "Ensure that the input is a valid integer before converting." => mentions ensuring a valid integer.
+        }
+    ],
+    "Language": "Python"
+    } 
+     The object contains all the required fields (severity,file name, issue, and suggestion). 
+    */
     let res = "";
     reviews.forEach((review) => {
       for (const [key, value] of Object.entries(review)) {
@@ -85,23 +77,3 @@ document.getElementById("sender").onclick = async function sendData() {
     document.getElementById("result").innerHTML = res;
   }
 };
-
-document.getElementById("file-check").onchange = function () {
-  let check = document.getElementById("file-check");
-  let text_input = document.getElementById("code");
-  let file_input = document.getElementById("file");
-  text_input.value = "";
-  file_input.value = "";
-
-  text = "";
-  if (check.checked) {
-    text_input.style.display = "none";
-    file_input.style.display = "block";
-  } else {
-    file_input.style.display = "none";
-    text_input.style.display = "block";
-  }
-};
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("file").style.display = "none";
-});
