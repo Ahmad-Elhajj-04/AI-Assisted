@@ -2,7 +2,7 @@
 
 function sendData() {
     axios.post('http://localhost/AI-Assisted/backend/review.php', {
-        code: "def get_input(): return input('Enter: ')",
+        code: "def get_input() return input('Enter: ')",
         filename: "app.py"
     })
     .then(function (response) {
