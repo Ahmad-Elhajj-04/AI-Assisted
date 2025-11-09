@@ -2,12 +2,12 @@
 
 header("Content-Type: application/json");
 
-$api_key = "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 ";
+//$api_key = "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 ";
 
-//$api_key = "kPEJEyDz6qfdMYXLhON0O1yQXToMSvAeJBYJVTYo";
+$api_key = "kPEJEyDz6qfdMYXLhON0O1yQXToMSvAeJBYJVTYo";
 
-$url = 'https://api.openai.com/v1/chat/completions';
-//$url = 'https://api.cohere.ai/compatibility/v1/chat/completions';
+//$url = 'https://api.openai.com/v1/chat/completions';
+$url = 'https://api.cohere.ai/compatibility/v1/chat/completions';
 
 $input = json_decode(file_get_contents("php://input"), true);
 
@@ -29,7 +29,7 @@ $category_rules = [
         'Security'=> ['SQL-injection'=> 'SEC-SQLI','Input Validation'=> 'SEC-VALIDATION', 'Hardcoded Secret' => 'SEC-SECRET'],
         'Bug risk'=> ['Might be Null'=> 'BUG-NULL-REF','Unsafe Type Comparison' => 'BUG-TYPE-COMPARE','Uninitizialized Variable' => 'BUG-UNINIT-VAR','Infinite Loop' => 'BUG-INIFINITE-LOOP',
         'Loop Boundary' => 'BUG-LOOP-BOUNDARY'] ,
-        'Maintainability' => ['Long Function' => 'MAIN-LONG-FUNC', 'Dupe Code' => 'MAIN-DUPE-CODE', 'Define Constant' => 'MAIN-DEFINE-CONST', 'Global State' => 'MAIN-GLOBAL-STATE'],
+        'Maintainability' => ['Long Function' => 'MAIN-LONG-FUNC', 'Dupe Code' => 'MAIN-DUPE-CODE', 'Define Constant' => 'MAIN-DEFINE-CONST', 'Global State' => 'MAIN-GLOBAL-STATE','Indentation Error' => 'MAIN-INDENTATION'],
         'Generic'=> ['Refactor' => 'GEN-REFACTOR','Complex' => 'GEN-COMPLEX', 'Performance'  => 'GEN-PERFORMANCE','Documentation' => 'GEN-DOCUMENTATION', 'Naming Convention' => 'GEN-NAME-CONV','Messy Code' => 'GEN-MESSY']
 ];
 
@@ -42,8 +42,8 @@ I need you to check this code for me for any possible mistakes,find the programm
 "reviews" that includes:
 
 1. Severity : high,medium,or low. 
-2. The file name: $file (or nothing if its not a file). 
-3. A short identifier of the issue with the category and rule-id according to this array : $category_rules. 
+2. The file name only from $file (or nothing if its not a file). 
+3. A short identifier of the issue with the category and rule-id according to this array : $category_rules.
 4. Which line the error is in. 
 5. A suggestion to fix the code .
 
@@ -70,7 +70,7 @@ I need you to check this code for me for any possible mistakes,find the programm
 
 1. Severity : high,medium,or low. 
 2. The file name only from $file (or nothing if its not a file). 
-3. A short identifier of the issue. 
+3. A short identifier of the issue.
 4. A suggestion to fix the code.
 
 Which means there should be four columns : Severity, File Name, Issue, and Suggestion. 
@@ -90,7 +90,7 @@ PROMPT;
 
 
 $data = [
-        'model'    => 'gpt-4o', //'command-a-03-2025'
+        'model'    => 'command-a-03-2025', //'command-a-03-2025'
         'messages' => [
                 ['role' => 'user', 'content' => $user_prompt],
         ],
