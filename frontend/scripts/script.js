@@ -37,12 +37,12 @@ document.getElementById("sender").onclick = async function sendData() {
   if (!check) {
     text = document.getElementById("code").value;
   }
-  if(text === "" && check)
-  {
-    document.getElementById('result').innerHTML = "Please select a file or use text version with a text written.";
-  return;
+  if (text === "" && check) {
+    document.getElementById("result").innerHTML =
+      "Please select a file or use text version with a text written.";
+    return;
   }
-  
+
   const response = await axios.post(
     "http://localhost/AI-Assisted/backend/review.php",
     {
@@ -53,15 +53,22 @@ document.getElementById("sender").onclick = async function sendData() {
   );
 
   let res = "";
-  res += "<strong>Your code:</strong> " + text + "<br>";
-  res += "<strong>Language:</strong> ";
-  document.getElementById('input-result').innerHTML = res;
   const data = response.data;
+  res = text;
+  document.getElementById("input-result").innerHTML = res;
+  res = data.Language;
+  document.getElementById("language").innerHTML = res;
+  
+
   console.log(data);
-  if (data.Status == "Success") {
+  if (data.Status == "Success" || data.Status == "Failure") {
     let res = "";
+    let i = 0;
     for (const [key, value] of Object.entries(data)) {
-      res += `<strong>${key}:</strong> ${value}<br>`;
+      if (i != 2) {
+        res += `<strong>${key}:</strong> ${value}<br>`;
+      }
+      i++;
     }
 
     document.getElementById("result").innerHTML = res;
@@ -79,26 +86,22 @@ document.getElementById("sender").onclick = async function sendData() {
   }
 };
 
-document.getElementById('file-check').onchange = function () {
-    
+document.getElementById("file-check").onchange = function () {
+  let check = document.getElementById("file-check");
+  let text_input = document.getElementById("code");
+  let file_input = document.getElementById("file");
+  text_input.value = "";
+  file_input.value = "";
 
-    let check = document.getElementById('file-check');
-    let text_input = document.getElementById('code');
-    let file_input = document.getElementById('file');
-    text_input.value = "";
-    file_input.value = ""; 
-    
-    text = "";
-    if(check.checked)
-    {
-        text_input.style.display= 'none';
-        file_input.style.display= 'block';
-
-    }else {
-        file_input.style.display = 'none';
-        text_input.style.display = 'block';
-
-    }
-}
-document.addEventListener('DOMContentLoaded',() => {
-    document.getElementById('file').style.display = 'none';}) ;
+  text = "";
+  if (check.checked) {
+    text_input.style.display = "none";
+    file_input.style.display = "block";
+  } else {
+    file_input.style.display = "none";
+    text_input.style.display = "block";
+  }
+};
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("file").style.display = "none";
+});
