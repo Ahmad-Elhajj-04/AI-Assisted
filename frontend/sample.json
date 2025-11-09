@@ -1,0 +1,19 @@
+[
+  {
+ "severity":"high",
+ "file":"app.py",
+ "issue":"missing input thats used to validate user input",
+ "suggestion" : "Add validation logic to clarify and senetize user input before processing"
+ },
+ {
+"severity":"medium",
+"file":"main.js",
+"issue":"Function has no error handiling for failed request",
+"suggestion":"Add a try-catch block or paper error handling for network failures"
+ },
+ {"severity":"low",
+ "file":"style.css",
+ "issue":"unused css class detected",
+ "suggestion":"remove unused class selection and keep the stylesheet clean"
+ }
+ ]
