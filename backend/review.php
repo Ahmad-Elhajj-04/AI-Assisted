@@ -2,14 +2,17 @@
 
 header("Content-Type: application/json");
 
-$api_key = "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 ";
+$api_key = "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 ";
+
+//$api_key = "kPEJEyDz6qfdMYXLhON0O1yQXToMSvAeJBYJVTYo";
+
 $url = 'https://api.openai.com/v1/chat/completions';
+//$url = 'https://api.cohere.ai/compatibility/v1/chat/completions';
 
-
-$user_prompt = "I need you to check this code for me for any possible mistakes, give me the response in JSON format according to the following instructions. 1. Severity : high,medium,or low. 2. The file name (or nothing if its not a file). 3. A short identifier of the issue. 4. A suggestion to fix the code .The result must be inside an object called 'reviews'.The code is : def greet_and_age(name, age)   print('Hello, ' + name) next_age = age + 1s print('Next year you will be: ' + next_age) greet_and_age('Jesse', '29') ";
+$user_prompt = "I need you to check this code for me for any possible mistakes, give me the response in JSON format according to the following instructions. 1. Severity : high,medium,or low. 2. The file name (or nothing if its not a file). 3. A short identifier of the issue. 4. A suggestion to fix the code .The result must be inside an object called 'reviews',no other data should be included in the answer.The code is : def greet_and_age(name, age)   print('Hello, ' + name) next_age = age + 1s print('Next year you will be: ' + next_age) greet_and_age('Jesse', '29') ";
 
 $data = [
-        'model'    => 'gpt-4o',
+        'model'    => 'command-a-03-2025',
         'messages' => [
                 ['role' => 'user', 'content' => $user_prompt],
         ],
