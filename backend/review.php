@@ -22,6 +22,7 @@ if(isset($input["code"]) && $input["code"] != ""){
 }
 
 $version =$input["version"];
+$file =$input["filename"];
 
 
 $category_rules = [
@@ -41,7 +42,7 @@ I need you to check this code for me for any possible mistakes,find the programm
 "reviews" that includes:
 
 1. Severity : high,medium,or low. 
-2. The file name (or nothing if its not a file). 
+2. The file name: $file (or nothing if its not a file). 
 3. A short identifier of the issue with the category and rule-id according to this array : $category_rules. 
 4. Which line the error is in. 
 5. A suggestion to fix the code .
@@ -68,7 +69,7 @@ I need you to check this code for me for any possible mistakes,find the programm
 "reviews": that includes:
 
 1. Severity : high,medium,or low. 
-2. The file name (or nothing if its not a file). 
+2. The file name only from $file (or nothing if its not a file). 
 3. A short identifier of the issue. 
 4. A suggestion to fix the code.
 

@@ -47,7 +47,7 @@ document.getElementById("sender").onclick = async function sendData() {
     "http://localhost/AI-Assisted/backend/review.php",
     {
       code: text,
-      filename: "app.py",
+      filename: document.getElementById('file').value,
       version: checkBox,
     }
   );
