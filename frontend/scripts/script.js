@@ -1,5 +1,3 @@
-// Simple axios example - just the basics
-
 document.getElementById('sender').onclick =  async function sendData() {
     await axios.post('http://localhost/AI-Assisted/backend/add_code.php', {
         code: document.getElementById('code').value,
@@ -11,6 +9,4 @@ document.getElementById('sender').onclick =  async function sendData() {
     .catch(function (error) {
         console.log(error.message);
     });
-
-    
 }
